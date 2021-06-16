@@ -15,8 +15,8 @@ find_package(Qt5Gui     5 REQUIRED)
 find_package(Qt5Widgets 5 REQUIRED)
 
 add_definitions(-DQT_QTWINMIGRATE_EXPORT)
-add_definitions(-DQTWINMIGRATE_WITHMFC)
 add_definitions(-D_AFXDLL)
+set(CMAKE_MFC_FLAG 2)
 
 include_directories(
     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
