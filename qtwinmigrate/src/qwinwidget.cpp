@@ -359,12 +359,17 @@ void QWinWidget::focusInEvent(QFocusEvent *e)
 bool QWinWidget::focusNextPrevChild(bool next)
 {
     QWidget *curFocus = focusWidget();
+    if (!curFocus)
+      return QWidget::focusNextPrevChild(next);
+
     if (!next) {
         if (!curFocus->isWindow()) {
             QWidget *nextFocus = curFocus->nextInFocusChain();
             QWidget *prevFocus = 0;
             QWidget *topLevel = 0;
             while (nextFocus != curFocus) {
+                if (!nextFocus)
+                  return QWidget::focusNextPrevChild(false);
                 if (nextFocus->focusPolicy() & Qt::TabFocus) {
                     prevFocus = nextFocus;
                     topLevel = 0;
@@ -382,6 +387,8 @@ bool QWinWidget::focusNextPrevChild(bool next)
         QWidget *nextFocus = curFocus;
         while (1) {
             nextFocus = nextFocus->nextInFocusChain();
+            if (!nextFocus)
+              return QWidget::focusNextPrevChild(true);
             if (nextFocus->isWindow())
                 break;
             if (nextFocus->focusPolicy() & Qt::TabFocus) {
