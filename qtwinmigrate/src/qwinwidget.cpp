@@ -253,7 +253,7 @@ void QWinWidget::resetFocus()
 /*! \reimp
 */
 #if QT_VERSION >= 0x050000
-bool QWinWidget::nativeEvent(const QByteArray &, void *message, long *)
+bool QWinWidget::nativeEvent(const QByteArray &, void *message, qintptr*)
 #else
 bool QWinWidget::winEvent(MSG *msg, long *)
 #endif

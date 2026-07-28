@@ -74,7 +74,7 @@ class QT_QTWINMIGRATE_EXPORT QMfcAppEventFilter : public QAbstractNativeEventFil
 {
 public:
     QMfcAppEventFilter();
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
+    bool nativeEventFilter(const QByteArray &eventType, void *message, qintptr* result) final;
 };
 #endif
 
@@ -91,7 +91,7 @@ public:
     QMfcApp(int &argc, char **argv);
     ~QMfcApp();
 
-    bool winEventFilter(MSG *msg, long *result);
+    bool winEventFilter(MSG *msg, qintptr* result);
 
     static void enterModalLoop();
     static void exitModalLoop();

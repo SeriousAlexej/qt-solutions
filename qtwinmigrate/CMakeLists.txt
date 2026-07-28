@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 
-project(QtSolutions_MFCMigrationFramework)
+project(qtwinmigrate)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -10,16 +10,16 @@ set(CMAKE_AUTORCC ON)
 get_filename_component(OUTPUT_DIR "install" ABSOLUTE BASE_DIR ${CMAKE_BINARY_DIR})
 file(MAKE_DIRECTORY ${OUTPUT_DIR})
 
-find_package(Qt5Core    5 REQUIRED)
-find_package(Qt5Gui     5 REQUIRED)
-find_package(Qt5Widgets 5 REQUIRED)
+find_package(Qt6Core    6 REQUIRED)
+find_package(Qt6Gui     6 REQUIRED)
+find_package(Qt6Widgets 6 REQUIRED)
 
 add_definitions(-DQT_QTWINMIGRATE_EXPORT)
 add_definitions(-D_AFXDLL)
 set(CMAKE_MFC_FLAG 2)
 
 include_directories(
-    ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
+    ${Qt6Gui_PRIVATE_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
@@ -42,9 +42,9 @@ add_library(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Widgets
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
     user32
 )
 

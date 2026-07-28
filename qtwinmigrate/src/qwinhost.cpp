@@ -87,7 +87,7 @@
 QWinHost::QWinHost(QWidget *parent, Qt::WindowFlags f)
 : QWidget(parent, f), wndproc(0),own_hwnd(false), hwnd(0)
 {
-    setAttribute(Qt::WA_NoBackground);
+    setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
 }
 
@@ -336,7 +336,7 @@ void QWinHost::resizeEvent(QResizeEvent *e)
     \reimp
 */
 #if QT_VERSION >= 0x050000
-bool QWinHost::nativeEvent(const QByteArray &eventType, void *message, long *result)
+bool QWinHost::nativeEvent(const QByteArray &eventType, void *message, qintptr* result)
 #else
 bool QWinHost::winEvent(MSG *msg, long *result)
 #endif

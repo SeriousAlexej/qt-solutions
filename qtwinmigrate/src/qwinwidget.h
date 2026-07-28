@@ -69,9 +69,9 @@ class QT_QTWINMIGRATE_EXPORT QWinWidget : public QWidget
 {
     Q_OBJECT
 public:
-    QWinWidget( HWND hParentWnd, QObject *parent = 0, Qt::WindowFlags f = 0 );
+    QWinWidget(HWND hParentWnd, QObject* parent = nullptr, Qt::WindowFlags f = {});
 #ifdef QTWINMIGRATE_WITHMFC
-    QWinWidget( CWnd *parnetWnd, QObject *parent = 0, Qt::WindowFlags f = 0 );
+    QWinWidget(CWnd* parnetWnd, QObject* parent = nullptr, Qt::WindowFlags f = {});
 #endif
     ~QWinWidget();
 
@@ -88,7 +88,7 @@ protected:
     bool focusNextPrevChild(bool next);
     void focusInEvent(QFocusEvent *e);
 #if QT_VERSION >= 0x050000
-    bool nativeEvent(const QByteArray &eventType, void *message, long *result);
+    bool nativeEvent(const QByteArray &eventType, void *message, qintptr* result);
 #else
     bool winEvent(MSG *msg, long *result);
 #endif

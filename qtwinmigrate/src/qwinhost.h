@@ -66,7 +66,7 @@ class QT_QTWINMIGRATE_EXPORT QWinHost : public QWidget
 {
     Q_OBJECT
 public:
-    QWinHost(QWidget *parent = 0, Qt::WindowFlags f = 0);
+    QWinHost(QWidget* parent = nullptr, Qt::WindowFlags f = {});
     ~QWinHost();
 
     void setWindow(HWND);
@@ -81,7 +81,7 @@ protected:
     void resizeEvent(QResizeEvent*);
 
 #if QT_VERSION >= 0x050000
-    bool nativeEvent(const QByteArray &eventType, void *message, long *result);
+    bool nativeEvent(const QByteArray &eventType, void *message, qintptr* result);
 #else
     bool winEvent(MSG *msg, long *result);
 #endif
