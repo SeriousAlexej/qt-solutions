@@ -55,6 +55,8 @@
 #include <QGlobalStatic>
 #include <QWidget>
 
+#include <chrono>
+
 #ifdef QTWINMIGRATE_WITHMFC
 #include <afxwin.h>
 #else
@@ -440,9 +442,13 @@ bool QMfcApp::winEventFilter(MSG *msg, qintptr* result)
 #ifdef QTWINMIGRATE_WITHMFC
     else if (mfc_app) {
         MSG tmp;
+        const auto start_idle_time = std::chrono::high_resolution_clock::now();
         while (doIdle && !PeekMessage(&tmp, 0, 0, 0, PM_NOREMOVE)) {
             if (!mfc_app->OnIdle(idleCount++))
                 doIdle = FALSE;
+            const auto now = std::chrono::high_resolution_clock::now();
+            if (std::chrono::duration_cast<std::chrono::milliseconds>(now - start_idle_time).count() >= 16)
+              doIdle = FALSE;
         }
         if (mfc_app->IsIdleMessage(msg)) {
             doIdle = TRUE;
